@@ -1,0 +1,8 @@
+name = Media gallery picker
+description = Filter for media gallery
+package = Media
+core = 7.x
+
+dependencies[] = media_gallery
+
+files[] = mg_picker.module
