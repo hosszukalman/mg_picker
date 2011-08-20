@@ -11,7 +11,23 @@
 /* ==== DRUPAL HOOKS ==== */
 /* ====================== */
 
+/**
+ * Implements hook_media_browser_plugin_info().
+ */
+function mg_picker_media_browser_plugin_info() {
+  return array(
+    'mg_picker' => array(),
+  );
+}
 
+/**
+ * Implementaion of hook_media_browser_plugin_view().
+ */
+function mg_picker_media_browser_plugin_view($plugin_name, $params) {
+  return array(
+    '#title' => t('Galleries'),
+  );
+}
 
 
 /* ====================== */
