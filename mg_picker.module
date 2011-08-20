@@ -51,4 +51,25 @@ function mg_picker_media_browser_plugin_view($plugin_name, $params) {
 
 
 /* ====================== */
-/* == MODULE FUNCTIONS == *//* ====================== */
+/* == MODULE FUNCTIONS == */
+/* ====================== */
+
+/**
+ * Build mg_picker_gallery_search_form form.
+ * 
+ * @param array $form_state
+ * @return
+ *   The created form. 
+ */
+function mg_picker_gallery_search_form($form_state) {
+  $form = array();
+
+  $form['gallery_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Gallery'),
+    '#description' => t('Type the title of the gallery, and the module will suggest the possibilities.'),
+    '#autocomplete_path' => 'mg_picker/autocomplete',
+  );
+
+  return $form;
+}
