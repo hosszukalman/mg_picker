@@ -73,3 +73,25 @@ function mg_picker_gallery_search_form($form_state) {
 
   return $form;
 }
+
+/**
+ * Autocomplete maches to finding galleries.
+ *
+ * @param array $string 
+ */
+function pg_picker_gallery_autocomplete($string) {
+  $matches = array();
+  
+  if ($string) {
+    $result = db_select('node')
+        ->fields('node', array('nid', 'title'))
+        ->condition('title', '%' . db_like($string) . '%', 'LIKE')
+        ->condition('type', 'media_gallery')
+        ->range(0, 10)->execute();
+    foreach ($result as $node) {
+      $matches[$node->nid] = check_plain($node->title);
+    }
+  }
+
+  drupal_json_output($matches);
+}
