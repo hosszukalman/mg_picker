@@ -45,10 +45,10 @@ function mg_picker_media_browser_plugin_info() {
 function mg_picker_media_browser_plugin_view($plugin_name, $params) {
   return array(
     '#title' => t('Galleries'),
+    'form' => drupal_get_form('mg_picker_gallery_search_form'),
   );
 }
 
 
 /* ====================== */
-/* == MODULE FUNCTIONS == */
-/* ====================== */
+/* == MODULE FUNCTIONS == *//* ====================== */
