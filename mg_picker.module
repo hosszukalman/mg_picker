@@ -12,6 +12,25 @@
 /* ====================== */
 
 /**
+ * Implementation of hook_menu().
+ *
+ * @return An array of menu items.
+ */
+function mg_picker_menu() {
+  $items = array();
+
+  $items['mg_picker/autocomplete'] = array(
+    'title' => 'Media Gallery picker autocomplete',
+    'description' => 'Form automplete callback, to get galleries.',
+    'page callback' => 'pg_picker_gallery_autocomplete',
+    'access callback' => 'media_access',
+    'access arguments' => array('view'),
+  );
+
+  return $items;
+}
+
+/**
  * Implements hook_media_browser_plugin_info().
  */
 function mg_picker_media_browser_plugin_info() {
