@@ -111,3 +111,24 @@ function pg_picker_gallery_autocomplete($string) {
 
   drupal_json_output($matches);
 }
+
+function mg_picker_get_images($form, $form_state) {
+  $out = '';
+  
+  $node = node_load($form_state['values']['gallery_nid']);
+  
+  if ($node->type == 'media_gallery') {
+    $files = file_load_multiple(media_gallery_get_file_ids($node));
+    
+    // This is shit, use medi module's funcions. I need a list function what generates the html and attach JS.
+    foreach ($files as $file) {
+//      $elements = array(
+//        '#theme' => 'media_thumbnail',
+//        '#file' => $file,
+//      );
+//      $out .= drupal_render($elements);
+    }
+    
+  }
+  return $out;
+}
