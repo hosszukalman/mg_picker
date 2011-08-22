@@ -26,7 +26,7 @@ function mg_picker_menu() {
     'access callback' => 'media_access',
     'access arguments' => array('view'),
   );
-
+  
   return $items;
 }
 
@@ -69,6 +69,22 @@ function mg_picker_gallery_search_form($form_state) {
     '#title' => t('Gallery'),
     '#description' => t('Type the title of the gallery, and the module will suggest the possibilities.'),
     '#autocomplete_path' => 'mg_picker/autocomplete',
+  );
+  
+  $form['gallery_nid_submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('OK'),
+    '#ajax' => array(
+      'callback' => 'mg_picker_get_images',
+      'wrapper' => 'gallery-images',
+      'effect' => 'fade',
+    ),
+  );
+  
+  // Container for just the gallery images.
+  $form['gallery_image_wrapper'] = array(
+    '#prefix' => '<div id="gallery-images">',
+    '#suffix' => '</div>',
   );
 
   return $form;
