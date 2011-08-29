@@ -56,6 +56,42 @@ function mg_picker_filter_info() {
 /* ====================== */
 
 /**
+ * Create the filter process.
+ *
+ * @param string $text
+ * @return
+ *   The replaced string 
+ */
+function mg_picker_filter($text) {
+  // Find and replace arrays.
+  $search = array();
+  $replace = array();
+  
+  // Regular expression
+  $finds = preg_match_all('/\[mg_picker:([0-9]*)[^\]]*\]/', $text, $matches);
+  
+  if ($finds) {
+    foreach ($matches[0] as $id => $full_pattern) {
+      // The default url, if fid not added
+      $url = 'media-gallery/detail/' . $matches[1][$id];
+      
+      // Findig a fid parameter
+      if (preg_match('/fid:([0-9]*)/', $full_pattern, $fid_matches)) {
+        $url .= '/' . $fid_matches[1];
+      }
+      
+      // Add the patter and the link
+      $search[] = $full_pattern;
+      $replace[] = l('Go to gallery', $url);
+      
+    }
+  }
+  
+  // Replace the finded patterns with the links
+  return str_replace($search, $replace, $text);;
+}
+
+/**
  * Build mg_picker_gallery_search_form form.
  * 
  * @param array $form_state
