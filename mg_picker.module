@@ -30,6 +30,26 @@ function mg_picker_menu() {
   return $items;
 }
 
+/**
+ * Implements hook_filter_info().
+ */
+function mg_picker_filter_info() {
+  $filters = array();
+  
+  $filters['mg_picker'] = array(
+    'title' => t('Media galleries'),
+    'description' => t('Converts media galleries to a link.'),
+    'process callback' => 'mg_picker_filter',
+    'tips callback' => 'mg_picker_filter_tips', // @TODO not implemented
+  );
+
+  // If the WYSIWYG module is enabled, add additional help.
+  if (module_exists('wysiwyg')) {
+    $filters['mg_picker']['description'] .= ' ' . t('This must be enabled for the WYSIWYG integration to work correctly with this text filter.');
+  }
+
+  return $filters;
+}
 
 /* ====================== */
 /* == MODULE FUNCTIONS == */
