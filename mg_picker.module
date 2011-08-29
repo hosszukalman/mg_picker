@@ -30,25 +30,6 @@ function mg_picker_menu() {
   return $items;
 }
 
-/**
- * Implements hook_media_browser_plugin_info().
- */
-function mg_picker_media_browser_plugin_info() {
-  return array(
-    'mg_picker' => array(),
-  );
-}
-
-/**
- * Implementaion of hook_media_browser_plugin_view().
- */
-function mg_picker_media_browser_plugin_view($plugin_name, $params) {
-  return array(
-    '#title' => t('Galleries'),
-    'form' => drupal_get_form('mg_picker_gallery_search_form'),
-  );
-}
-
 
 /* ====================== */
 /* == MODULE FUNCTIONS == */
