@@ -72,20 +72,31 @@ function mg_picker_filter($text) {
   
   if ($finds) {
     foreach ($matches[0] as $id => $full_pattern) {
-      $node = node_load($matches[1][$id]);
+      $render_link = NULL;
+      $gallery_node = node_load($matches[1][$id]);
       
       // The default url, if fid not added
-      $url = 'media-gallery/detail/' . $node->nid;
+      $url = 'media-gallery/detail/' . $gallery_node->nid;
       
       // Findig a fid parameter
       if (preg_match('/fid:([0-9]*)/', $full_pattern, $fid_matches)) {
-        $url .= '/' . $fid_matches[1];
+        // Load the file object
+        $file = file_load($fid_matches[1]);
+        
+        // Render HTML
+        $render_array = media_gallery_item_view($gallery_node, $file, 'media_gallery_block_thumbnail');
+        $render_link = drupal_render($render_array);
       }
       
       // Add the patter and the link
       $search[] = $full_pattern;
-      $replace[] = l('Go to gallery', $url);
-      
+      // If found render link
+      if (!empty($render_link)) {
+        $replace[] = $render_link;
+      }
+      else {
+        $replace[] = l('Go to gallery', $url);
+      }
     }
   }
   
