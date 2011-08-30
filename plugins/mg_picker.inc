@@ -20,7 +20,13 @@ function mg_picker_mg_picker_plugin() {
     'vendor url' => 'https://github.com/hosszukalman/mg_picker',
     'icon file' => 'mg_picker.gif',
     'icon title' => t('Select the media gallery.'),
-    'settings' => array(),
+    'settings' => array(
+      'dialog' => array(
+        'url' => base_path() . 'index.php?q=wysiwyg/mg_picker',
+        'width' => 700,
+        'height' => 500,
+      ),
+    ),
   );
   
   return $plugins;
