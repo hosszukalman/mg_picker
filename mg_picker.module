@@ -51,6 +51,20 @@ function mg_picker_filter_info() {
   return $filters;
 }
 
+/**
+ * Register a directory containing Wysiwyg plugins.
+ *
+ * @param $type
+ *   The type of objects being collected: either 'plugins' or 'editors'.
+ * @return
+ *   A sub-directory of the implementing module that contains the corresponding
+ *   plugin files. This directory must only contain integration files for
+ *   Wysiwyg module.
+ */
+function mg_picker_wysiwyg_include_directory($type) {
+  return $type;
+}
+
 /* ====================== */
 /* == MODULE FUNCTIONS == */
 /* ====================== */
