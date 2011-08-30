@@ -72,8 +72,10 @@ function mg_picker_filter($text) {
   
   if ($finds) {
     foreach ($matches[0] as $id => $full_pattern) {
+      $node = node_load($matches[1][$id]);
+      
       // The default url, if fid not added
-      $url = 'media-gallery/detail/' . $matches[1][$id];
+      $url = 'media-gallery/detail/' . $node->nid;
       
       // Findig a fid parameter
       if (preg_match('/fid:([0-9]*)/', $full_pattern, $fid_matches)) {
