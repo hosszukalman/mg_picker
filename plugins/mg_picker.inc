@@ -31,3 +31,18 @@ function mg_picker_mg_picker_plugin() {
   
   return $plugins;
 }
+
+/**
+ * Implementing hook_wysiwyg_dialog().
+ *
+ * @param type $instance
+ * @return type 
+ */
+function mg_picker_wysiwyg_dialog($instance) {
+  drupal_set_title(t('This is the title?'));
+
+  return array(
+//    '#marup' => 'not good',
+//    '#content' => 'not good',
+  );
+}
