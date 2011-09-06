@@ -198,7 +198,7 @@ function pg_picker_gallery_autocomplete($string) {
  *   The HTML string of the thumnail images.
  */
 function mg_picker_get_images($form, $form_state) {
-  $out = '';
+  $out = '<div id="gallery-images">';
 
   // Regular expression for get node ID.
   $finds = preg_match('/\[nid:([0-9]*)[^\]]*\]/', $form_state['values']['gallery_nid'], $matches);
@@ -221,6 +221,8 @@ function mg_picker_get_images($form, $form_state) {
       }
     }
   }
+
+  $out .= '</div>';
 
   return $out;
 }
