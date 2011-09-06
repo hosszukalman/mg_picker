@@ -39,10 +39,11 @@ function mg_picker_mg_picker_plugin() {
  * @return type 
  */
 function mg_picker_wysiwyg_dialog($instance) {
-  drupal_set_title(t('This is the title?'));
-
+  drupal_set_title(t('Select a gallery'));
+  
+  $form = drupal_get_form('mg_picker_gallery_search_form');
+  
   return array(
-//    '#marup' => 'not good',
-//    '#content' => 'not good',
+    'content' => drupal_render($form),
   );
 }
