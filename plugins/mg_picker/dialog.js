@@ -44,7 +44,7 @@
    */
   Drupal.behaviors.mgPickerInsertItem = {
     attach: function (context, settings) {
-      $('#edit-submit', context).click(function () {
+      $('#mg-picker-gallery-search-form #edit-submit', context).click(function () {
         // No gallery selected
         if (typeof(Drupal.settings.mgPicker) == "undefined") {
           alert(Drupal.t('Please select a gallery!'));
