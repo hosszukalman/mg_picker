@@ -209,6 +209,7 @@ function mg_picker_get_images($form, $form_state) {
 
     // Validate type
     if ($gallery_node->type == 'media_gallery') {
+      drupal_add_js(array('mgPicker' => array('galleryNid' => $gallery_node->nid)), 'setting');
 
       // Load files
       $files = file_load_multiple(media_gallery_get_file_ids($gallery_node));
@@ -217,7 +218,7 @@ function mg_picker_get_images($form, $form_state) {
       foreach ($files as $file) {
         $render_array = file_view_file($file, 'media_preview');
         $out .= l(drupal_render($render_array), '#', array('html' => TRUE,
-          'attributes' => array('class' => 'mg-picker-file-item')));
+          'attributes' => array('class' => 'mg-picker-file-item', 'id' => 'mg-picker-file-' . $file->fid)));
       }
     }
   }
