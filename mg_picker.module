@@ -216,7 +216,8 @@ function mg_picker_get_images($form, $form_state) {
       // Render files
       foreach ($files as $file) {
         $render_array = file_view_file($file, 'media_preview');
-        $out .= drupal_render($render_array);
+        $out .= l(drupal_render($render_array), '#', array('html' => TRUE,
+          'attributes' => array('class' => 'mg-picker-file-item')));
       }
     }
   }
