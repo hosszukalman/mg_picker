@@ -151,6 +151,19 @@ function mg_picker_gallery_search_form($form_state) {
     '#suffix' => '</div>',
   );
 
+  $form['actions'] = array(
+    '#type' => 'actions',
+  );
+
+  $form['actions']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Insert'),
+  );
+
+  $form['actions']['cancel'] = array(
+    '#markup' => l(t('Cancel'), '#', array('attributes' => array('id' => 'mg-picker-cancel'))),
+  );
+
   return $form;
 }
 
@@ -196,7 +209,7 @@ function mg_picker_get_images($form, $form_state) {
 
     // Validate type
     if ($gallery_node->type == 'media_gallery') {
-      
+
       // Load files
       $files = file_load_multiple(media_gallery_get_file_ids($gallery_node));
 
