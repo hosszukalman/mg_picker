@@ -90,7 +90,7 @@ function mg_picker_filter($text) {
       $gallery_node = node_load($matches[1][$id]);
 
       // The default url, if fid not added
-      $url = 'media-gallery/detail/' . $gallery_node->nid;
+      $url = 'node/' . $gallery_node->nid;
 
       // Findig a fid parameter
       if (preg_match('/fid:([0-9]*)/', $full_pattern, $fid_matches)) {
