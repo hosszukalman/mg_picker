@@ -169,7 +169,7 @@ function pg_picker_gallery_autocomplete($string) {
         ->condition('type', 'media_gallery')
         ->range(0, 10)->execute();
     foreach ($result as $node) {
-      $matches[$node->nid] = check_plain($node->title);
+      $matches["[nid:{$node->nid}] " . check_plain($node->title)] = check_plain($node->title);
     }
   }
 
