@@ -137,7 +137,7 @@ function mg_picker_gallery_search_form($form_state) {
 
   $form['gallery_nid_submit'] = array(
     '#type' => 'submit',
-    '#value' => t('OK'),
+    '#value' => t('Select gallery'),
     '#ajax' => array(
       'callback' => 'mg_picker_get_images',
       'wrapper' => 'gallery-images',
@@ -157,7 +157,7 @@ function mg_picker_gallery_search_form($form_state) {
 
   $form['actions']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Insert'),
+    '#value' => t('Insert pattern'),
   );
 
   $form['actions']['cancel'] = array(
