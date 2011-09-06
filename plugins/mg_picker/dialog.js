@@ -39,4 +39,43 @@
     }
   };
 
+  /**
+   * Insert the pattern
+   */
+  Drupal.behaviors.mgPickerInsertItem = {
+    attach: function (context, settings) {
+      $('#edit-submit', context).click(function () {
+        // No gallery selected
+        if (typeof(Drupal.settings.mgPicker) == "undefined") {
+          alert(Drupal.t('Please select a gallery!'));
+          return false;
+        }
+
+        // Default pattern
+        var pattern = '[mg_picker:' + Drupal.settings.mgPicker.galleryNid;
+
+        var target = window.opener || window.parent;
+        var dialog = Drupal.settings.wysiwyg;
+        // Check selected item
+        var selected_item = $('.mg-picker-file-item.selected', $('#gallery-images'));
+
+        // Add selected item's fid
+        if (typeof(selected_item.attr('id')) != "undefined") {
+          var class_array = selected_item.attr('id').split('-');
+          pattern += ' fid:' + class_array.pop();
+        }
+
+        // Pattern closure
+        pattern += ']';
+
+        // Insert pattern into currently attached editor.
+        target.Drupal.wysiwyg.instances[dialog.instance].insert(pattern);
+        // Close this dialog.
+        target.Drupal.wysiwyg.instances[dialog.instance].closeDialog(window);
+
+        return false;
+      });
+    }
+  };
+
 })(jQuery);
