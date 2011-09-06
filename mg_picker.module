@@ -176,23 +176,37 @@ function pg_picker_gallery_autocomplete($string) {
   drupal_json_output($matches);
 }
 
+/**
+ * Get images for wysiwyg dialog.
+ *
+ * @param type $form
+ * @param type $form_state
+ * @return
+ *   The HTML string of the thumnail images.
+ */
 function mg_picker_get_images($form, $form_state) {
   $out = '';
 
+  // Regular expression for get node ID.
   $finds = preg_match('/\[nid:([0-9]*)[^\]]*\]/', $form_state['values']['gallery_nid'], $matches);
 
   if ($finds) {
+    // Load the node
     $gallery_node = node_load($matches[1]);
 
+    // Validate type
     if ($gallery_node->type == 'media_gallery') {
+      
+      // Load files
       $files = file_load_multiple(media_gallery_get_file_ids($gallery_node));
 
+      // Render files
       foreach ($files as $file) {
         $render_array = file_view_file($file, 'media_preview');
         $out .= drupal_render($render_array);
       }
     }
   }
-  
+
   return $out;
 }
