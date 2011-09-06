@@ -41,6 +41,7 @@ function mg_picker_mg_picker_plugin() {
 function mg_picker_wysiwyg_dialog($instance) {
   $module_path = drupal_get_path('module', 'mg_picker');
   drupal_add_js($module_path . '/plugins/mg_picker/dialog.js', 'file');
+  drupal_add_css($module_path . '/plugins/mg_picker/reset.css', array('group' => CSS_THEME));
   drupal_add_css($module_path . '/plugins/mg_picker/dialog.css', array('group' => CSS_THEME));
 
   drupal_set_title(t('Select a gallery'));
