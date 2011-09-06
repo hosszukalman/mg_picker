@@ -22,4 +22,21 @@
     }
   };
 
+  /**
+   * Select file item
+   */
+  Drupal.behaviors.mgPickerSelectItem = {
+    attach: function (context, settings) {
+      $('.mg-picker-file-item', context).click(function () {
+        $('.mg-picker-file-item', context).each(function() {
+          $(this).removeClass('selected');
+        });
+
+        $(this).addClass('selected');
+
+        return false;
+      });
+    }
+  };
+
 })(jQuery);
