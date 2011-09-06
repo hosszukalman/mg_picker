@@ -23,8 +23,8 @@ function mg_picker_mg_picker_plugin() {
     'settings' => array(
       'dialog' => array(
         'url' => base_path() . 'index.php?q=wysiwyg/mg_picker',
-        'width' => 700,
-        'height' => 500,
+        'width' => 620,
+        'height' => 580,
       ),
     ),
   );
