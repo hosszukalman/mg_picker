@@ -1,12 +1,12 @@
 <?php
 /**
  * @file
- * 
- * 
+ *
+ *
  *
  * @author Kálmán Hosszu - hosszu.kalman@gmail.com
  */
- 
+
 /* ====================== */
 /* ==== DRUPAL HOOKS ==== */
 /* ====================== */
@@ -26,7 +26,7 @@ function mg_picker_menu() {
     'access callback' => 'media_access',
     'access arguments' => array('view'),
   );
-  
+
   return $items;
 }
 
@@ -35,7 +35,7 @@ function mg_picker_menu() {
  */
 function mg_picker_filter_info() {
   $filters = array();
-  
+
   $filters['mg_picker'] = array(
     'title' => t('Media galleries'),
     'description' => t('Converts media galleries to a link.'),
@@ -74,34 +74,34 @@ function mg_picker_wysiwyg_include_directory($type) {
  *
  * @param string $text
  * @return
- *   The replaced string 
+ *   The replaced string
  */
 function mg_picker_filter($text) {
   // Find and replace arrays.
   $search = array();
   $replace = array();
-  
+
   // Regular expression
   $finds = preg_match_all('/\[mg_picker:([0-9]*)[^\]]*\]/', $text, $matches);
-  
+
   if ($finds) {
     foreach ($matches[0] as $id => $full_pattern) {
       $render_link = NULL;
       $gallery_node = node_load($matches[1][$id]);
-      
+
       // The default url, if fid not added
       $url = 'media-gallery/detail/' . $gallery_node->nid;
-      
+
       // Findig a fid parameter
       if (preg_match('/fid:([0-9]*)/', $full_pattern, $fid_matches)) {
         // Load the file object
         $file = file_load($fid_matches[1]);
-        
+
         // Render HTML
         $render_array = media_gallery_item_view($gallery_node, $file, 'media_gallery_block_thumbnail');
         $render_link = drupal_render($render_array);
       }
-      
+
       // Add the patter and the link
       $search[] = $full_pattern;
       // If found render link
@@ -113,17 +113,17 @@ function mg_picker_filter($text) {
       }
     }
   }
-  
+
   // Replace the finded patterns with the links
   return str_replace($search, $replace, $text);;
 }
 
 /**
  * Build mg_picker_gallery_search_form form.
- * 
+ *
  * @param array $form_state
  * @return
- *   The created form. 
+ *   The created form.
  */
 function mg_picker_gallery_search_form($form_state) {
   $form = array();
@@ -134,7 +134,7 @@ function mg_picker_gallery_search_form($form_state) {
     '#description' => t('Type the title of the gallery, and the module will suggest the possibilities.'),
     '#autocomplete_path' => 'mg_picker/autocomplete',
   );
-  
+
   $form['gallery_nid_submit'] = array(
     '#type' => 'submit',
     '#value' => t('OK'),
@@ -144,7 +144,7 @@ function mg_picker_gallery_search_form($form_state) {
       'effect' => 'fade',
     ),
   );
-  
+
   // Container for just the gallery images.
   $form['gallery_image_wrapper'] = array(
     '#prefix' => '<div id="gallery-images">',
@@ -157,11 +157,11 @@ function mg_picker_gallery_search_form($form_state) {
 /**
  * Autocomplete maches to finding galleries.
  *
- * @param array $string 
+ * @param array $string
  */
 function pg_picker_gallery_autocomplete($string) {
   $matches = array();
-  
+
   if ($string) {
     $result = db_select('node')
         ->fields('node', array('nid', 'title'))
@@ -178,21 +178,21 @@ function pg_picker_gallery_autocomplete($string) {
 
 function mg_picker_get_images($form, $form_state) {
   $out = '';
-  
-  $node = node_load($form_state['values']['gallery_nid']);
-  
-  if ($node->type == 'media_gallery') {
-    $files = file_load_multiple(media_gallery_get_file_ids($node));
-    
-    // This is shit, use medi module's funcions. I need a list function what generates the html and attach JS.
-    foreach ($files as $file) {
-//      $elements = array(
-//        '#theme' => 'media_thumbnail',
-//        '#file' => $file,
-//      );
-//      $out .= drupal_render($elements);
+
+  $finds = preg_match('/\[nid:([0-9]*)[^\]]*\]/', $form_state['values']['gallery_nid'], $matches);
+
+  if ($finds) {
+    $gallery_node = node_load($matches[1]);
+
+    if ($gallery_node->type == 'media_gallery') {
+      $files = file_load_multiple(media_gallery_get_file_ids($gallery_node));
+
+      foreach ($files as $file) {
+        $render_array = file_view_file($file, 'media_preview');
+        $out .= drupal_render($render_array);
+      }
     }
-    
   }
+  
   return $out;
 }
