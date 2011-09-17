@@ -91,6 +91,29 @@ function mg_picker_image_default_styles() {
   return $styles;
 }
 
+/**
+ * Implements hook_theme().
+ *
+ * @param type $existing
+ * @param type $type
+ * @param type $theme
+ * @param type $path
+ * @return type
+ */
+function mg_picker_theme($existing, $type, $theme, $path) {
+  return array(
+    'mg_picker_content_image' => array(
+      'variables' => array(
+        'image_link' => '',
+        'image_title' => NULL,
+        'photographer' => NULL,
+      ),
+      'template' => 'mg_picker-content-image',
+      'path' => drupal_get_path('module', 'mg_picker') . '/theme',
+    ),
+  );
+}
+
 /* ====================== */
 /* == MODULE FUNCTIONS == */
 /* ====================== */
