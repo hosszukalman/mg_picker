@@ -154,12 +154,16 @@ function mg_picker_filter($text) {
         );
 
         $image_link = l(drupal_render($render_array), "media-gallery/detail/{$gallery_node->nid}/{$file->fid}", array('html' => TRUE));
+        $image_infos = array(
+          'image_title' => field_view_field('file', $file, 'media_title'),
+          'photographer' => field_view_field('file', $file, 'field_photographer'),
+        );
 
         $render_array = array(
           '#theme' => 'mg_picker_content_image',
           '#image_link' => $image_link,
-          '#image_title' => drupal_render(field_view_field('file', $file, 'media_title')),
-          '#photographer' => drupal_render(field_view_field('file', $file, 'field_photographer')),
+          '#image_title' => drupal_render($image_infos['image_title']),
+          '#photographer' => drupal_render($image_infos['photographer']),
         );
 
         $render_link = drupal_render($render_array);
