@@ -124,8 +124,13 @@ function mg_picker_filter($text) {
         $file = file_load($fid_matches[1]);
 
         // Render HTML
-        $render_array = media_gallery_item_view($gallery_node, $file, 'media_gallery_block_thumbnail');
-        $render_link = drupal_render($render_array);
+        $render_array = array(
+          '#theme' => 'image_style',
+          '#style_name' => 'media_gallery_picker_content',
+          '#path' => $file->uri,
+        );
+
+        $render_link = l(drupal_render($render_array), "media-gallery/detail/{$gallery_node->nid}/{$file->fid}", array('html' => TRUE));
       }
 
       // Add the patter and the link
