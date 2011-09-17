@@ -65,6 +65,32 @@ function mg_picker_wysiwyg_include_directory($type) {
   return $type;
 }
 
+
+/**
+ * Implements hook_image_default_styles().
+ *
+ * @return array
+ */
+function mg_picker_image_default_styles() {
+  $styles = array();
+
+  $styles['media_gallery_picker_content'] = array(
+    'effects' => array(
+      array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 400,
+          'height' => 400,
+          'upscale' => 1,
+        ),
+        'weight' => 0,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
 /* ====================== */
 /* == MODULE FUNCTIONS == */
 /* ====================== */
