@@ -162,8 +162,8 @@ function mg_picker_filter($text) {
         $render_array = array(
           '#theme' => 'mg_picker_content_image',
           '#image_link' => $image_link,
-          '#image_title' => drupal_render($image_infos['image_title']),
-          '#photographer' => drupal_render($image_infos['photographer']),
+          '#image_title' => $image_infos['image_title'],
+          '#photographer' =>$image_infos['photographer'],
         );
 
         $render_link = drupal_render($render_array);
