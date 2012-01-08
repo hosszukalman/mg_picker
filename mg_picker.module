@@ -153,7 +153,8 @@ function mg_picker_filter($text) {
           '#path' => $file->uri,
         );
 
-        $image_link = l(drupal_render($render_array), "media-gallery/detail/{$gallery_node->nid}/{$file->fid}", array('html' => TRUE));
+        $image_link = l(drupal_render($render_array), "media-gallery/detail/{$gallery_node->nid}/{$file->fid}",
+            array('html' => TRUE, 'attributes' => array('target' => '_blank')));
         $image_infos = array(
           'image_title' => field_view_field('file', $file, 'media_title'),
           'photographer' => field_view_field('file', $file, 'field_photographer'),
